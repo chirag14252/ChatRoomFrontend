@@ -11,8 +11,10 @@ function App() {
 
   return (
     <>
+    
      <Routes>
-      <Route path ="/login" Component={Home}/>
+      <Route path ="/Home" Component={Home}/>
+       
      </Routes>
     </>
   )
