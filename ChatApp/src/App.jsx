@@ -7,7 +7,7 @@ import EntryPage from './components/EntryPage/EntryPage'
 
 
 function App() {
-
+  
 
 
   return (
@@ -22,9 +22,11 @@ function App() {
         return item  ? Navigate({to:"/Home"}) : <EntryPage/>;
        }
       }></Route>
-      
       <Route path ='/Home' Component={
-        Home
+        ()=>{
+         const item = localStorage.getItem('is_present');
+         return item  ? <Home/> : Navigate({to:"/"});
+        }
       }/>
       <Route path = "*" Component={EntryPage}/>
      </Routes>

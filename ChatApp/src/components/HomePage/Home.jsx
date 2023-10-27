@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-
+import axios from "axios"
 import "./home.css"
 
 
@@ -16,6 +16,9 @@ const Home = () => {
 
   useEffect(() => {
     localStorage.setItem("user",false);
+    // axios.get("http://localhost:3000/getMessage").then((res)=>{
+    // setChat(res.data.message)
+    // },[chat])
     socket.on('chat', (payload) => {
       setChat([...chat, payload]);
     })
@@ -27,9 +30,21 @@ const name = useLocation();
   const formSubmitHandler = (e) => {
     e.preventDefault();
     if(message.length != 0){
+    if(name.state){
     socket.emit('chat', { message:message,username: name.state});
-    
+    const reqBody = {
+      "username":name.state,
+      "message":message
+    }
+    axios.post("http://localhost:3000/userActivity",reqBody).then(()=>{
+      console.log("message sent");
+    });
     setMessage("");
+    }
+    else{
+      alert("pls go back and enter your username again");
+    }
+   
     }
   }
   return (

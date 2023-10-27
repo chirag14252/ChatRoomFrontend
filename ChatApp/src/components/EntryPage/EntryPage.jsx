@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./EntryPage.css"
 
 const EntryPage = () => {
-
+    
     const [name, setName] = useState('');
     const navigate = useNavigate();
    
