@@ -12,11 +12,11 @@ function App() {
 
   return (
     <>
-    
+      
      <Routes>
       
       {/* if the target is / */}
-      <Route path='/' Component={
+       <Route path='/' Component={
        ()=>{
         const item = localStorage.getItem('is_present');
         return item  ? Navigate({to:"/Home"}) : <EntryPage/>;
@@ -28,8 +28,10 @@ function App() {
          return item  ? <Home/> : Navigate({to:"/"});
         }
       }/>
-      <Route path = "*" Component={EntryPage}/>
+   
+      <Route path = "*" Component={EntryPage}/> 
      </Routes>
+     
     </>
   )
 }
