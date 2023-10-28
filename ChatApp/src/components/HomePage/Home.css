@@ -1,3 +1,7 @@
+
+
+
+
 .heading {
   color: white;
   font-family: sans-serif;
@@ -9,6 +13,7 @@
 
 .speech-wrapper {
   padding: 20px 30px;
+  width:60%;
   .bubble {
     width: 240px;
     height: auto;
@@ -83,29 +88,34 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  margin: 0px ;
   width: 100%;
   background-color: #fff; /* Set your desired background color */
   padding: 10px;
   display: flex;
+  border-radius: 5px;
 }
 
 .fixed-form input[type="text"] {
   flex: 1;
-  padding: 5px;
-  border: none;
-  border-bottom: 1px solid #3498db; /* Example border style */
+  padding: 10px 10px;
+  margin-right: 10px;
+  
+  /* Example border style */
 }
 
-.fixed-form button {
-  background-color: #3498db; /* Example button background color */
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  margin-left: 10px;
-  cursor: pointer;
-}
+
 
 .message-container {
-  max-height: 35rem; /* Adjust the maximum height as needed */
+  margin-top: 3rem;
+  max-height: 48rem; /* Adjust the maximum height as needed */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
+}
+
+.submit-home{
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  right: 10px;
 }

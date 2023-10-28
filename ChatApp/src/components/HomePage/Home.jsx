@@ -4,6 +4,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Helmet } from 'react-helmet';
 import "./home.css";
+import NavBar from './NavBar/NavBar.jsx';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -12,12 +13,14 @@ const Home = () => {
   const [username, setName] = useState('');
   const [chat, setChat] = useState([]);
   const messageContainerRef = useRef(null); 
+  const [currentTimeDate,setCurrent] = useState('');
 
   useEffect(() => {
     axios.get("http://localhost:3000/getMessage").then((res) => {
       setChat(res.data.message);
     });
     scroller();
+    updateTime();
   }, []);
 
   useEffect(() => {
@@ -25,15 +28,28 @@ const Home = () => {
 
     socket.on('chat', (payload) => {
       setChat([...chat, payload]);
-     
+      
     });
     scroller();
+   //date and time obj
+    updateTime();
+
+
   }, [chat]); // Added [chat] as a dependency
 
 const scroller = ()=>{
   if (messageContainerRef.current) {
     messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
   }
+}
+//time and date calculator
+const updateTime = ()=>{
+  let date = new Date().toLocaleDateString("de-DE");
+   const now = new Date();
+   const hours = now.getHours();
+   const minutes = now.getMinutes();
+   const time = hours+":"+minutes;
+   setCurrent({date : date,time:time})
 }
 
   const formSubmitHandler = (e) => {
@@ -53,16 +69,23 @@ const scroller = ()=>{
     }
   };
 
+
+
+
+
+
   return (
+    <>
+     <NavBar date={currentTimeDate}/>
     <div className='home-section'>
       <Helmet>
         <style>{'body { background:url("http://forums.crackberry.com/attachments/blackberry-10-wallpapers-f308/137432d1361639896t-z10-wallpaper-set-z10-music.jpg")'}</style>
       </Helmet>
-      <button onClick={() => {
+      {/* <button onClick={() => {
         localStorage.removeItem("is_present");
         navigate("/");
-      }}>Back</button>
-      <h1 className='heading'>Chat App</h1>
+      }}>Back</button> */}
+    
 
       <div className='message-container'ref={messageContainerRef}>
         {chat.map((data, i) => {
@@ -83,9 +106,10 @@ const scroller = ()=>{
 
       <form onSubmit={formSubmitHandler} className='fixed-form'>
         <input type="text" id="msg" placeholder='Type your chat' value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button type='submit'>Send</button>
+        <button type='submit' className='submit-home'><img src = "/send.png"></img></button>
       </form>
     </div>
+    </>
   );
 };
 
