@@ -6,6 +6,7 @@ import EntryPage from './components/EntryPage/EntryPage'
 
 
 
+
 function App() {
   
 
@@ -30,6 +31,7 @@ function App() {
       }/>
    
       <Route path = "*" Component={EntryPage}/> 
+      
      </Routes>
      
     </>
