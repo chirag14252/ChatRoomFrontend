@@ -70,3 +70,9 @@
     top:15px;
     right:10px;
 }
+
+.backtoEntry{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

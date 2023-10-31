@@ -108,7 +108,7 @@
 
 .message-container {
   margin-top: 3rem;
-  max-height: 48rem; /* Adjust the maximum height as needed */
+  max-height: 40rem; /* Adjust the maximum height as needed */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
 }
 

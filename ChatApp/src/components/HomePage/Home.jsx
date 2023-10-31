@@ -1,13 +1,14 @@
 import { useState, useEffect , useRef} from 'react';
 import { connectSocket, socket } from "../../../Socket.js";
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import axios from "axios";
 import { Helmet } from 'react-helmet';
 import "./home.css";
 import NavBar from './NavBar/NavBar.jsx';
+import InstanceAxios from "../../axios.js"
+
 
 const Home = () => {
-  const navigate = useNavigate();
+  
   const name = useLocation();
   const [message, setMessage] = useState('');
   const [username, setName] = useState('');
@@ -16,7 +17,7 @@ const Home = () => {
   const [currentTimeDate,setCurrent] = useState('');
 
   useEffect(() => {
-    axios.get("http://localhost:3000/getMessage").then((res) => {
+    InstanceAxios().get("/getMessage").then((res) => {
       setChat(res.data.message);
     });
     scroller();
@@ -60,7 +61,7 @@ const updateTime = ()=>{
         "username": name.state,
         "message": message
       };
-      axios.post("http://localhost:3000/userActivity", reqBody).then(() => {
+     InstanceAxios().post("/userActivity", reqBody).then(() => {
         console.log("message sent");
       });
       setMessage("");
@@ -81,10 +82,7 @@ const updateTime = ()=>{
       <Helmet>
         <style>{'body { background:url("http://forums.crackberry.com/attachments/blackberry-10-wallpapers-f308/137432d1361639896t-z10-wallpaper-set-z10-music.jpg")'}</style>
       </Helmet>
-      {/* <button onClick={() => {
-        localStorage.removeItem("is_present");
-        navigate("/");
-      }}>Back</button> */}
+      
     
 
       <div className='message-container'ref={messageContainerRef}>
